@@ -18,7 +18,8 @@ install:
   - source activate virsorter
   - pwd
   - ls 
-  - find -name "test.pl"
+  - ls -l ./t
+  - find / -name "test.pl"
 before_script:
   - cpanm --quiet FASTX::Reader
 script: cpanm Proch::N50
