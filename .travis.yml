@@ -16,7 +16,8 @@ install:
   - conda info -a
   - conda create -n virsorter -c bioconda mcl=14.137 muscle blast perl-bioperl perl-file-which hmmer=3.1b2 perl-parallel-forkmanager perl-list-moreutils diamond=0.9.14 metagene_annotator
   - source activate virsorter
-  - pwd
+  - mkdir -p $HOME/virsorter-test/
+  - wget -0 $HOME/virsorter-test/virsorter.tgz "https://zenodo.org/record/1168727/files/virsorter-data-v2.tar.gz"
 before_script:
   - cpanm --quiet File::HomeDir
 script: perl ./t/test.t

@@ -18,9 +18,6 @@ my $data = '/data/';
 # Temporary directory
 my $tmp  = catdir(File::HomeDir->my_home, 'virsorter-test');
 
-
-
-
 my $bin   = "$Bin/../wrapper_phage_contigs_sorter_iPlant.pl";
 
 ok(-e $bin, "Binary found: $bin");
@@ -71,16 +68,18 @@ done_testing();
 
 sub get_data {
 	my $tar_file = catfile($tmp, "virsorter.tgz");
-
+	say STDERR " * Needing: $tar_file";
 	if (! -e "$tar_file") {
+	    	say STDERR "   * Downloading";
 		my $url = "https://zenodo.org/record/1168727/files/virsorter-data-v2.tar.gz";
 		mkpath($tmp);
 		#getstore($url, $file);	
 		`wget --quiet -O "$tar_file" "$url"`;
 		die "Unable to download: 'wget' failed.\n" if ($?);
 	}
-
+	say STDERR " * Expanding $tar_file";
 	`tar xfz "$tar_file" -C "$tmp" `;
+	say STDERR "   * Done";
 	die "Unable to download: 'tar' failed: ", qq(tar xfz -C "$tmp" "$tar_file"), "\n" if ($?);
 		#my $tar = Archive::Tar->new;
 		#$tar->setcwd($tmp);
