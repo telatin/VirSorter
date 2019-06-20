@@ -7,8 +7,16 @@ addons:
     - wget
 sudo: false
 install:
-  - "source ./t/install.sh"
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a
+  - conda create -q -n virsorter python=$TRAVIS_PYTHON_VERSION  -c bioconda mcl=14.137 muscle blast perl-bioperl perl-file-which hmmer=3.1b2 perl-parallel-forkmanager perl-list-moreutils diamond=0.9.14 metagene_annotator
+  - source activate virsorter
 before_script:
   - cpanm --quiet FASTX::Reader
-script: "perl ./t/test.pl"
+script: perl ./t/test.pl
 
