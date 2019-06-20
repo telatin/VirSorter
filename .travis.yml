@@ -14,7 +14,7 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - conda create -q -n virsorter python=$TRAVIS_PYTHON_VERSION  -c bioconda mcl=14.137 muscle blast perl-bioperl perl-file-which hmmer=3.1b2 perl-parallel-forkmanager perl-list-moreutils diamond=0.9.14 metagene_annotator
+  - conda create -n virsorter -c bioconda mcl=14.137 muscle blast perl-bioperl perl-file-which hmmer=3.1b2 perl-parallel-forkmanager perl-list-moreutils diamond=0.9.14 metagene_annotator
   - source activate virsorter
 before_script:
   - cpanm --quiet FASTX::Reader
