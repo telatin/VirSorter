@@ -3,8 +3,8 @@ addons:
   apt:
     packages:
     - build-essential
-perl:
-  - "5.14"
+    - bzip2
+    - wget
 sudo: false
 install:
   - "source ./t/install.sh"
