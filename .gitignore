@@ -1,5 +1,5 @@
 bin
 *.o
-t/
+/t/out
 virsorter-out/
 local/
