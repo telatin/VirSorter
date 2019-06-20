@@ -19,5 +19,5 @@ install:
   - pwd
 before_script:
   - cpanm --quiet FASTX::Reader
-script: perl .t/test.t
+script: perl ./t/test.t
 
