@@ -53,7 +53,8 @@ use File::Which 'which';
 use Getopt::Long 'GetOptions';
 use Pod::Usage;
 use Cwd 'cwd';
-use Term::ANSIColor;
+use lib "$Bin/Scripts/lib";
+use Local::Virsorter;
 
 my $help            = '';
 my $code_dataset    = 'VIRSorter';
@@ -87,6 +88,10 @@ GetOptions(
    'no_c'        => \$no_c,
    'verbose'     => \$opt_verbose,		# Enable verbose output
 );
+
+my $V = Local::Virsorter->new({
+	verbose => \$opt_verbose,
+});
 
 if ($help) {
     pod2usage();
@@ -662,8 +667,5 @@ sub safe_mv {
 
 sub verbose {
 	my ($text) = @_;
-	return unless ($opt_verbose);
-	print STDERR color('cyan'), ""  unless (defined $ENV{'NO_COLOR'});
-	say STDERR  " * $text";
-	print STDERR color('reset'), "" unless (defined $ENV{'NO_COLOR'});
+	$V->verbose($text);
 }

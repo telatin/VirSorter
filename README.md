@@ -1,7 +1,10 @@
 # VirSorter
 
-This is the QIB Fork of VirSorter
 [![Build Status](https://travis-ci.org/telatin/VirSorter.svg?branch=master)](https://travis-ci.org/telatin/VirSorter)
+
+This is the QIB Fork of VirSorter. Changes that could be of public interest will be pulled to the original repository.
+
+~Andrea Telatin
 
 
 # Original README
