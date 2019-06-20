@@ -148,9 +148,10 @@ my $readme_file        = catfile($data_dir, 'VirSorter_Readme.txt');
 my $ref_phage_clusters = catfile($data_dir,
                          'Phage_gene_catalog', 'Phage_Clusters_current.tab');
 
-verbose("hmmsearch: $path_hmmsearch");
-verbose("blastp:    $path_blastp");
-verbose("diamond:   $path_diamond");
+verbose("hmmsearch: $path_hmmsearch\n" .
+        "blastp:    $path_blastp\n",   
+        "diamond:   $path_diamond");
+
 if ($diamond == 1) {
     $path_diamond      = which('diamond')   or die "FATAL ERROR: `diamond` is not in the \$PATH\n";
     verbose("Diamond path found: $path_diamond");
@@ -183,6 +184,7 @@ my $out = "";
 ## SETTING UP THE WORKING DIRECTORY
 my $log_dir = catdir($wdir, 'logs');
 if (-d $log_dir) {
+    verbose("Log dir *already* found: $log_dir");
 ## Commented on iPlant, but can be useful when running VirSorter on a directory already processed 
 ## (to avoid recomputing the gene prediction and comparison to PFAM especially)
 #    $out = `rm -r $log_dir/* *.csv`; 
@@ -190,13 +192,17 @@ if (-d $log_dir) {
 } 
 else {
     mkpath($log_dir);
+    verbose("Creating log dir: $log_dir");
 }
+
 my $log_out = catfile($log_dir, 'out');
 my $log_err = catfile($log_dir, 'err');
 
 # cp fasta file in the wdir
 my $fastadir = catdir($wdir, 'fasta');
+
 if ( !-d $fastadir ) {
+    verbose("Creating FASTA dir: $fastadir");
     mkpath($fastadir);
     my $fna_file = catfile($fastadir, 'input_sequences.fna');
     open my $fa, '<', $input_file;
@@ -228,6 +234,7 @@ if ( !-d $fastadir ) {
         . ">> $log_out 2>> $log_err";
     say "Started at ".(localtime);
     say "Step 0.5 : $cmd_step_1";
+    verbose(" * Running script 1: ''$cmd_step_1''");
     `echo $cmd_step_1 >> $log_out 2>> $log_err`;
     $out = `$cmd_step_1`;
 }
@@ -656,7 +663,7 @@ sub safe_mv {
 sub verbose {
 	my ($text) = @_;
 	return unless ($opt_verbose);
-	print STDERR color('yellow'), ""  unless (defined $ENV{'NO_COLOR'});
+	print STDERR color('cyan'), ""  unless (defined $ENV{'NO_COLOR'});
 	say STDERR  " * $text";
 	print STDERR color('reset'), "" unless (defined $ENV{'NO_COLOR'});
 }
