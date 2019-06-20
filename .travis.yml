@@ -1,0 +1,14 @@
+language: perl
+addons:
+  apt:
+    packages:
+    - build-essential
+perl:
+  - "5.14"
+sudo: false
+install:
+  - "source ./t/install.sh"
+before_script:
+  - cpanm --quiet FASTX::Reader
+script: "perl ./t/test.pl"
+
