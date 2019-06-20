@@ -18,6 +18,6 @@ install:
   - source activate virsorter
   - pwd
 before_script:
-  - cpanm --quiet FASTX::Reader
+  - cpanm --quiet File::HomeDir
 script: perl ./t/test.t
 
