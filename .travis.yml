@@ -17,10 +17,7 @@ install:
   - conda create -n virsorter -c bioconda mcl=14.137 muscle blast perl-bioperl perl-file-which hmmer=3.1b2 perl-parallel-forkmanager perl-list-moreutils diamond=0.9.14 metagene_annotator
   - source activate virsorter
   - pwd
-  - ls 
-  - ls -l ./t
-  - find / -name "test.pl"
 before_script:
   - cpanm --quiet FASTX::Reader
-script: cpanm Proch::N50
+script: perl .t/test.t
 
